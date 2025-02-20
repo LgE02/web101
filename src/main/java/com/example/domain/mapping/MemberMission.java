@@ -39,7 +39,7 @@ public class MemberMission extends BaseEntity {
             member.getMemberMissions().add(this);
         }
     }
-    //mission(오류X)
+    //mission
     public void setMission(Mission mission) {
         if(this.mission != null) {
             this.mission.getMemberMissions().remove(this);
@@ -49,5 +49,10 @@ public class MemberMission extends BaseEntity {
             mission.getMemberMissions().add(this);
         }
     }
+
+    public void updateStatus(MissionStatus status) {
+        this.status = status;
+    }
+
 
 }

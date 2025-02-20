@@ -34,4 +34,6 @@ public class TempController {
     public CommonResponse<TempResponse.TempTestDto> createdAPI() {
         return CommonResponse.of(SuccessStatus.CREATED, TempConverter.toTempTestDto("This is test string!"));
     }
+
+
 }

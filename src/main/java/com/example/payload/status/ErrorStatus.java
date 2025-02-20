@@ -22,7 +22,13 @@ public enum ErrorStatus implements BaseStatus {
     ARTICLE_NOT_FOUND(HttpStatus.NOT_FOUND, "ARTICLE_4001", "게시글이 없습니다."),
 
     // For test
-    TEMP_EXCEPTION(HttpStatus.BAD_REQUEST, "TEMP_4001", "이것은 테스트")
+    TEMP_EXCEPTION(HttpStatus.BAD_REQUEST, "TEMP_4001", "이것은 테스트"),
+
+    CATEGORY_NOT_FOUND(HttpStatus.BAD_REQUEST, "CATEGORY_4001", "카테고리가 없습니다."),
+    STORE_NOT_FOUND(HttpStatus.BAD_REQUEST, "CATEGORY_4001","가게가 없습니다"),
+    MISSION_NOT_FOUND(HttpStatus.BAD_REQUEST, "MISSION_4001","미션이 없습니다"),
+    MISSION_ALREADY_WORK(HttpStatus.BAD_REQUEST, "MISSION_4002","이미 진행중인 미션입니다."),
+    MISSION_NOT_MEMBER(HttpStatus.BAD_REQUEST, "MISSION_4003","해당 미션신청을 받아오지 못했습니다.")
     ;
 
     private final HttpStatus httpStatus;

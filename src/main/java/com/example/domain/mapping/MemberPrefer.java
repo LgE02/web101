@@ -13,7 +13,7 @@ import lombok.*;
 public class MemberPrefer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Key;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")

@@ -9,6 +9,9 @@ import com.example.domain.mapping.MemberPrefer;
 import com.example.domain.mapping.TermsAgreement;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,6 +19,8 @@ import java.util.List;
 
 @Entity
 @Getter
+@DynamicInsert
+@DynamicUpdate
 @Builder
 @NoArgsConstructor(access= AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -35,10 +40,13 @@ public class Member extends BaseEntity {
     @Column(nullable = false, length =40)
     private String spec_address;
 
-    @Column(nullable = false, length = 50)
+    //nullable = false,
+    @Column( length = 50)
     private String email;
 
+    @ColumnDefault("0")
     private Integer point;
+
     private LocalDate inactiveDate;
 
     //열거형
