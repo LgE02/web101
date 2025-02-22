@@ -6,6 +6,7 @@ import com.example.payload.CommonResponse;
 import com.example.service.review.ReviewCommandService;
 import com.example.web.dto.ReviewRequest;
 import com.example.web.dto.ReviewResponse;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ public class ReviewController {
     private final ReviewCommandService reviewCommandService;
 
     @PostMapping("/")
+    @Operation(summary = "가게 리뷰 추가 API")
     public CommonResponse<ReviewResponse.JoinResultDto> join(@RequestBody @Valid ReviewRequest.JoinDto dto){
         Review review = reviewCommandService.join(dto);
         return CommonResponse.onSuccess(ReviewConverter.toJoinResultDto(review));

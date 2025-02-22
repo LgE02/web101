@@ -1,18 +1,17 @@
 package com.example.validation.annotaion;
 
-import com.example.domain.enums.MissionStatus;
 import com.example.validation.validator.MemberExistValidator;
-import com.example.validation.validator.MissionStatusExistValidator;
+import com.example.validation.validator.MissionExistValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
 import java.lang.annotation.*;
 
 @Documented
-@Constraint(validatedBy = {MissionStatusExistValidator.class})
+@Constraint(validatedBy = {MissionExistValidator.class})
 @Target({ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ExistsMissionStatus {
+public @interface ExistsMission {
     String message() default "해당하는 미션은 존재하지 않습니다.";
     Class<?>[] groups() default { };
     Class<? extends Payload>[] payload() default {};

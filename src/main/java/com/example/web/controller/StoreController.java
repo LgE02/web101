@@ -1,9 +1,14 @@
 package com.example.web.controller;
 
+import com.example.converter.MissionConverter;
 import com.example.converter.ReviewConverter;
+import com.example.domain.Mission;
 import com.example.domain.Review;
 import com.example.payload.CommonResponse;
 import com.example.service.store.StoreQueryService;
+import com.example.validation.annotaion.CheckPage;
+import com.example.validation.annotaion.ExistsStore;
+import com.example.web.dto.MissionResponse;
 import com.example.web.dto.ReviewResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -14,8 +19,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+@Validated
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/stores")
@@ -35,10 +42,24 @@ public class StoreController {
             @Parameter(name = "storeId", description = "가게 ID(path variable)", required = true),
     })
     public CommonResponse<ReviewResponse.ReviewListDto> getStoreReviews(
-            /*@ExistStore*/ @PathVariable(name = "storeId") Long storeId,
-            /*@CheckPage*/ @RequestParam(name = "page", defaultValue = "0") Integer page) {
+            @ExistsStore @PathVariable(name = "storeId") Long storeId,
+            @CheckPage @RequestParam(name = "page", defaultValue = "0") Integer page) {
         Page<Review> reviews = storeQueryService.getReviews(storeId, page);
 
         return CommonResponse.onSuccess(ReviewConverter.toReviewListDto(reviews));
     }
+
+    @GetMapping("/{storeId}/missions")
+    @Operation(summary = "특정 가게의 미션 목록 조회 API")
+    @Parameters(value = {
+            @Parameter(name = "storeId", description = "가게 ID(path variable)", required = true),
+    })
+    public CommonResponse<MissionResponse.MissionListDto> getStoreMissions(
+            @ExistsStore @PathVariable(name = "storeId") Long storeId,
+            @CheckPage @RequestParam(name = "page", defaultValue = "0") Integer page){
+        Page<Mission> missions = storeQueryService.getMissions(storeId, page);
+
+        return CommonResponse.onSuccess(MissionConverter.toMissionListDto(missions));
+    }
+
 }

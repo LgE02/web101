@@ -3,6 +3,7 @@ package com.example.validation.validator;
 import com.example.payload.status.ErrorStatus;
 import com.example.repository.MemberMissionRepository;
 import com.example.repository.MemberRepository;
+import com.example.service.MemberMission.MemberMissionCommandService;
 import com.example.service.MemberMission.MemberMissionCommandServiceImpl;
 import com.example.service.review.ReviewCommandServiceImpl;
 import com.example.validation.annotaion.ExistsMember;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class MemberExistValidator implements ConstraintValidator<ExistsMember, Long> {
     private final ReviewCommandServiceImpl reviewCommandService;
+    private final MemberMissionCommandServiceImpl memberMissionCommandService;
 
 
     @Override
@@ -25,28 +27,16 @@ public class MemberExistValidator implements ConstraintValidator<ExistsMember, L
     @Override
     public boolean isValid(Long aLong, ConstraintValidatorContext constraintValidatorContext) {
         boolean isValid = reviewCommandService.memberExistsById(aLong);
+        boolean isValid2 = memberMissionCommandService.memberExistsById(aLong);
 
-        if(!isValid) {
+        if(!isValid || !isValid2) {
             constraintValidatorContext.disableDefaultConstraintViolation();
             constraintValidatorContext.buildConstraintViolationWithTemplate(ErrorStatus.MEMBER_NOT_FOUND.toString())
                     //해당 오류를 문자열로 반환
                     .addConstraintViolation();
         }
 
-        return isValid;
+        return isValid || isValid2;
     }
 
-//    @Override
-//    public boolean isValid2(Long aLong, ConstraintValidatorContext constraintValidatorContext) {
-//        boolean isValid2 = memberMissionCommandService.memberExistsById(aLong);
-//
-//        if(!isValid2) {
-//            constraintValidatorContext.disableDefaultConstraintViolation();
-//            constraintValidatorContext.buildConstraintViolationWithTemplate(ErrorStatus.MEMBER_NOT_FOUND.toString())
-//                    //해당 오류를 문자열로 반환
-//                    .addConstraintViolation();
-//        }
-//
-//        return isValid2;
-//    }
 }

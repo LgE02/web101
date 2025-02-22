@@ -23,7 +23,7 @@ public class ReviewConverter {
     }
     //요청이 왔을때 특정 리뷰의 목록 리스크
     public static ReviewResponse.ReviewListDto toReviewListDto(Page<Review> reviews) {
-        List<ReviewResponse.SimpleReviewDto> reviewDtos = reviews.stream()
+        List<ReviewResponse.SimpleReviewDto> reviewDtos = reviews.getContent().stream()
                 .map(review -> ReviewConverter.toSimpleReviewDto(review))
                 .toList();
 

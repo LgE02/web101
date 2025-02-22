@@ -28,7 +28,9 @@ public enum ErrorStatus implements BaseStatus {
     STORE_NOT_FOUND(HttpStatus.BAD_REQUEST, "CATEGORY_4001","가게가 없습니다"),
     MISSION_NOT_FOUND(HttpStatus.BAD_REQUEST, "MISSION_4001","미션이 없습니다"),
     MISSION_ALREADY_WORK(HttpStatus.BAD_REQUEST, "MISSION_4002","이미 진행중인 미션입니다."),
-    MISSION_NOT_MEMBER(HttpStatus.BAD_REQUEST, "MISSION_4003","해당 미션신청을 받아오지 못했습니다.")
+    MISSION_NOT_MEMBER(HttpStatus.BAD_REQUEST, "MISSION_4003","해당 미션신청을 받아오지 못했습니다."),
+
+    PAGE_NUM_ERROR(HttpStatus.BAD_REQUEST, "MISSION_4001","페이지 번호는 0이상이여야 합니다.")
     ;
 
     private final HttpStatus httpStatus;

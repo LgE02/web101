@@ -1,6 +1,7 @@
 package com.example.validation.validator;
 
 import com.example.payload.status.ErrorStatus;
+import com.example.repository.StoreRepository;
 import com.example.service.review.ReviewCommandServiceImpl;
 import com.example.validation.annotaion.ExistsStore;
 import jakarta.validation.ConstraintValidator;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Component;
 public class StoreExistValidator implements ConstraintValidator<ExistsStore, Long> {
 
     private final ReviewCommandServiceImpl reviewCommandService;
-    //private final StoreRepository storeRepository;
+    private final StoreRepository storeRepository;
 
     @Override
     public void initialize(ExistsStore constraintAnnotation) {

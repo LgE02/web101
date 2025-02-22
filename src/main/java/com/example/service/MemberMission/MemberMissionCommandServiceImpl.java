@@ -32,6 +32,12 @@ public class MemberMissionCommandServiceImpl implements MemberMissionCommandServ
     public boolean checkStatus(MissionStatus status) {
         return status == MissionStatus.PROGRESS;
     }
+    public boolean memberExistsById(Long memberId) {
+        return memberRepository.existsById(memberId);
+    }
+    public boolean missionExistsById(Long missionId) {
+        return missionRepository.existsById(missionId);
+    }
 
 
     public MemberMission updateMissionStatus(Long memberId, Long missionId, MemberMissionRequest.JoinDto dto){
